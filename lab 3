@@ -1,0 +1,62 @@
+#include <iostream>
+#include <list> 
+
+template <typename T, typename Container = std::list<T>>
+class Queue {
+private:
+    Container container; 
+
+public:
+    
+    void enqueue(const T& value) {
+        container.push_back(value); 
+    }
+
+   
+    void dequeue() {
+        if (!container.empty()) {
+            container.pop_front(); 
+        }
+        else {
+            throw std::out_of_range("Queue is empty");
+        }
+    }
+
+    T front() const {
+        if (!container.empty()) {
+            return container.front(); 
+        }
+        else {
+            throw std::out_of_range("Queue is empty");
+        }
+    }
+
+    
+    bool isEmpty() const {
+        return container.empty();
+    }
+
+   
+    size_t size() const {
+        return container.size();
+    }
+};
+
+int main() {
+    Queue<int> q; 
+
+    q.enqueue(0);
+    q.enqueue(1);
+    q.enqueue(2);
+    q.enqueue(3);
+    q.enqueue(4);
+    q.enqueue(5);
+
+    std::cout << "Front element: " << q.front() << std::endl; 
+
+    q.dequeue();
+
+    std::cout << "Front element after dequeue: " << q.front() << std::endl; 
+
+    return 0;
+}
