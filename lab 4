@@ -1,0 +1,65 @@
+//Создайте свой манипуляторы которые будут выполнять 1) вывод всех
+//символов большими а чисел в OCT формате 2) вывод всех символов маленькими
+//и замену пробелов на # 3)вывод всех чисел в HEX формате и не выводить
+//пробелов
+
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+#include <cctype>
+#include <string>
+
+void printUppercaseAndOct(const std::string& input) {
+    std::cout << "Output of all characters in large and numbers in OCT format:";
+    for (char ch : input) {
+        if (std::isalpha(ch)) {
+            std::cout << static_cast<char>(std::toupper(ch));
+        }
+        else if (std::isdigit(ch)) {
+            int digit = ch - '0';
+            std::cout << std::oct << digit;
+        }
+    }
+    std::cout << std::dec << std::endl; 
+}
+
+void printLowercaseAndReplaceSpaces(const std::string& input) {
+    std::cout << "Print all characters small and replace spaces with #:";
+    for (char ch : input) {
+        if (std::isalpha(ch)) {
+            std::cout << static_cast<char>(std::tolower(ch));
+        }
+        else if (std::isspace(ch)) {
+            std::cout << '#';
+        }
+        else {
+            std::cout << ch;
+        }
+    }
+    std::cout << std::endl;
+}
+
+void printHexNumbers(const std::string& input) {
+    std::cout << "Output all numbers in HEX format and do not output spaces:";
+    for (char ch : input) {
+        if (std::isdigit(ch)) {
+            int digit = ch - '0'; 
+            std::cout << std::hex << std::uppercase << digit;
+        }
+    }
+    std::cout << std::dec << std::endl; 
+}
+
+int main() {
+    std::string input;
+
+    std::cout << "Enter string: ";
+    std::getline(std::cin, input);
+
+    printUppercaseAndOct(input);
+    printLowercaseAndReplaceSpaces(input);
+    printHexNumbers(input);
+
+    return 0;
+}
+
